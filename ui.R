@@ -1,0 +1,151 @@
+header <- dashboardHeader(title = "Analisis Data Google Playstore")
+
+sidebar <- dashboardSidebar(
+    sidebarMenu(
+        menuItem(text = "Bussiness Case", 
+                 tabName = "case", 
+                 icon = icon("dollar-sign")),
+        menuItem(text = "About", 
+                 tabName = "about", 
+                 icon = icon("info-circle")),
+        menuItem(text = "Prediction", 
+                 tabName = "predict", 
+                 icon = icon("balance-scale"))
+        
+    )
+)
+
+body <- dashboardBody(
+    tabItems(
+        tabItem(tabName = "predict", 
+                h1("Price Prediction", align = "center"),
+                fluidRow(
+                    box(title = "Factorial Input",
+                        background = "black",
+                        width = 6,
+                        selectInput(inputId = "blue", 
+                                    label = "Bluetooth",
+                                    choices = unique(price$blue)),
+                        selectInput(inputId = "sim", 
+                                    label = "Dual Sim",
+                                    choices = unique(price$dual_sim)),
+                        selectInput(inputId = "forg", 
+                                    label = "Four-G",
+                                    choices = unique(price$four_g)),
+                        selectInput(inputId = "touch", 
+                                    label = "Touchscreen",
+                                    choices = unique(price$touch_screen)),
+                        selectInput(inputId = "trig", 
+                                    label = "Tree-G",
+                                    choices = unique(price$three_g)),
+                        selectInput(inputId = "wifi", 
+                                    label = "Wifi",
+                                    choices = unique(price$wifi))
+                        
+                        
+                    ),
+                    box(title = "Numeric Input",
+                        background = "maroon",
+                        width = 6,
+                        solidHeader = TRUE,
+                        numericInput(inputId = "batery", 
+                                     label = "Battery Power", 
+                                     value = 1000,
+                                     min = 2000, 
+                                     max = 2000, 
+                                     step = 0.1),
+                        numericInput(inputId = "clock", 
+                                     label = "Clock Speed", 
+                                     value = 3,
+                                     min = 0.5, 
+                                     max = 3, 
+                                     step = 0.1),
+                        numericInput(inputId = "fc", 
+                                     label = "Front Camera (megapixels)", 
+                                     value = 19,
+                                     min = 0, 
+                                     max = 19, 
+                                     step = 0.1),
+                        numericInput(inputId = "int", 
+                                     label = "Internal Memory", 
+                                     value = 64,
+                                     min = 2, 
+                                     max = 64, 
+                                     step = 1),
+                        numericInput(inputId = "dep", 
+                                     label = "Mobile depth (cm)", 
+                                     value = 1,
+                                     min = 0.1, 
+                                     max = 1.5, 
+                                     step = 0.1),
+                        numericInput(inputId = "weight", 
+                                     label = "Mobile weight (gram)", 
+                                     value = 200,
+                                     min = 80, 
+                                     max = 200, 
+                                     step = 1),
+                        numericInput(inputId = "core", 
+                                     label = "Number of cores of processor", 
+                                     value = 8,
+                                     min = 1, 
+                                     max = 8, 
+                                     step = 1),
+                        numericInput(inputId = "pcam", 
+                                     label = "Primary Camera (megapixels)", 
+                                     value = 20,
+                                     min = 0, 
+                                     max = 20, 
+                                     step = 1),
+                        numericInput(inputId = "px_h", 
+                                     label = "pixel resolution height", 
+                                     value = 1960,
+                                     min = 0, 
+                                     max = 1960, 
+                                     step = 1),
+                        numericInput(inputId = "px_w", 
+                                     label = "pixel resolution width", 
+                                     value = 1998,
+                                     min = 500, 
+                                     max = 1998, 
+                                     step = 1),
+                        numericInput(inputId = "ram", 
+                                     label = "RAM (Megabytes)", 
+                                     value = 3998,
+                                     min = 256, 
+                                     max = 3998, 
+                                     step = 1),
+                        numericInput(inputId = "sch", 
+                                     label = "Screen Height (cm)", 
+                                     value = 21,
+                                     min = 5, 
+                                     max = 21, 
+                                     step = 0.1),
+                        numericInput(inputId = "scw", 
+                                     label = "Screen Width (cm)", 
+                                     value = 15,
+                                     min = 0, 
+                                     max = 18, 
+                                     step = 0.1),
+                        numericInput(inputId = "talk", 
+                                     label = "How long the battery will last while talking on phone (hours)", 
+                                     value = 20,
+                                     min = 2, 
+                                     max = 20, 
+                                     step = 1)),
+                    valueBoxOutput("prediction")
+                )
+        )
+        
+        
+    ))
+
+
+
+
+
+dashboardPage(
+    header = header,
+    body = body,
+    sidebar = sidebar, 
+    skin = "green"
+)
